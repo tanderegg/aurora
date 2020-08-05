@@ -27,7 +27,7 @@
     name: "{{ pgdg_repository }}"
     state: present
   check_mode: no
-  #when: not custom_repo
+  when: not custom_repo
   tags:
     - postgresql-server
 
