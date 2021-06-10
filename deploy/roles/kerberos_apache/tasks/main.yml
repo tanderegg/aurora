@@ -3,6 +3,7 @@
 - name: Create http principal
   command: kadmin -p {{ krb_service_user }}/admin -w {{ krb_service_user_password }} -q "addprinc -randkey HTTP/{{ proxy_subdomain }}.{{ domain_name }}"
   when: create_keytabs and kerberos_enabled
+  ignore_errors: yes # fails when build locally
   run_once: True
 
 - name: Add keytab for http
@@ -10,6 +11,7 @@
   args:
     creates: /etc/httpd/http.keytab
   when: create_keytabs and kerberos_enabled
+  ignore_errors: yes # fails when build locally
   register: created_http_keytab
 
 - name: Update permissions
@@ -26,7 +28,8 @@
     state: latest
   with_items:
     - mod_auth_kerb
-    - mod_authz_ldap
+#    - mod_authz_ldap
+    - mod_ldap
 
 - name: Update neccessary LDAP setting
   lineinfile:

@@ -52,7 +52,7 @@
 # shell: "systemctl restart httpd24-httpd"
 # shell: "service httpd24-httpd restart"
   systemd:
-    name: httpd24-httpd
+    name: httpd
     state: restarted
     enabled: True
 

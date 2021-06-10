@@ -12,12 +12,16 @@
     - kerberos
     - apache
     - kerberos_apache
-    - {role: epel, when: "use_epel and install_logstash and not 'production' in group_names"}
-    - {role: log-courier, when: "install_logstash"}
-    - {role: python, when: "custom_repo and install_python"}
-    - {role: python-build, when: "not custom_repo"}
-    - python36-scl
-    - odbc
+    - {role: epel7, when: "use_epel and install_logstash and not 'production' in group_names"}
+    # - {role: log-courier, when: "install_logstash"}
+    # - {role: python, when: "custom_repo and install_python"}
+    # - {role: python-build, when: "not custom_repo"}
+    # - python36-scl
+    - devtools7
+    - python2rh7
+    - python3rh7
+    - python-libs7
+    - odbc7
 
   tasks:
     - name: Create apache directories

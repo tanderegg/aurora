@@ -6,7 +6,7 @@ avastus_conf_file_path: /opt/avastus-conf
 
 avastus_venv_path: /opt/avastus.env3
 
-avastus_repo: 
+avastus_repo: https://github.cfpb.gov/data/avastus
 
 avastus_apache_conf: /srv/www/enclave_proxy/apps
 
