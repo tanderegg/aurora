@@ -26,11 +26,13 @@
 - name: Create host principal
   command: kadmin -p {{ krb_service_user }}/admin -w {{ krb_service_user_password }} -q "addprinc -randkey host/{{ proxy_subdomain }}.{{ domain_name }}"
   when: create_keytabs and kerberos_enabled
+  ignore_errors: yes # fails when build locally
   run_once: True
 
 - name: Add keytab for host
   command: kadmin -p {{ krb_service_user }}/admin -w {{ krb_service_user_password }} -q "ktadd host/{{ proxy_subdomain }}.{{ domain_name }}"
   when: create_keytabs and kerberos_enabled
+  ignore_errors: yes # fails when build locally
   run_once: True
 
 - name: Create empty log files if they don't exist

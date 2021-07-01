@@ -3,7 +3,7 @@
   become: yes
   become_method: sudo
   handlers:
-    - import_tasks: roles/shared/handlers/main.yml
+    - import_tasks: roles/shared7/handlers/main.yml
   tasks:
     - name: Install git
       yum:
@@ -29,7 +29,8 @@
         state: directory
 
     - name: Test configuration
-      command: "service httpd24-httpd configtest"
+#      command: "service httpd configtest"
+      command: apachectl configtest
       register: apache_result
       ignore_errors: yes
 
@@ -42,5 +43,9 @@
       when: enclave_proxy_repo is defined and apache_result.rc != 0
 
     - name: Gracefully restart apache
-      command: "service httpd24-httpd graceful"
-      when: apache_result.rc == 0
+#      command: "service httpd graceful"
+      systemd:
+        name: httpd
+        daemon_reload: yes
+        state: restarted
+        enabled: True
