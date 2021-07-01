@@ -1,4 +1,4 @@
-# ---
+---
 # RHEL 7
 - name: Install CentOS Software Collection Library (SCL) when on CentOS
   yum:
